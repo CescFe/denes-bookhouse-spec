@@ -21,10 +21,11 @@ public class ProductController implements ProductsApi {
     private final ProductUseCase productUseCase;
 
     @Override
-    public ResponseEntity<Void> createProduct(@Valid @RequestBody ProductDTO productDTO) {
+    public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductDTO productDTO) {
         Product product = mapToDomain(productDTO);
-        productUseCase.createProduct(product);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        Product createdProduct = productUseCase.createProduct(product);
+        ProductDTO responseDTO = mapToDto(createdProduct);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 
     @Override

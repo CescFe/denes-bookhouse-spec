@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ApplicationConfig {
+public class ApplicationProductConfig {
 
     @Bean
     public ProductService productService(ProductRepositoryPort productRepositoryPort) {
@@ -19,4 +19,5 @@ public class ApplicationConfig {
     public ProductRepositoryPort productRepositoryPort(SpringDataProductRepository repository) {
         return new JpaProductRepository(repository);
     }
+
 }

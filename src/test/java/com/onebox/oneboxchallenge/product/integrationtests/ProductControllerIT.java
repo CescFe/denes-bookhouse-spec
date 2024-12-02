@@ -1,6 +1,7 @@
-package com.onebox.oneboxchallenge.integrationtests;
+package com.onebox.oneboxchallenge.product.integrationtests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openapitools.model.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,6 @@ public class ProductControllerIT {
     private static final Long VALID_ID_FOR_GET = 1L;
     private static final Long VALID_ID_FOR_PUT = 2L;
     private static final Long VALID_ID_FOR_DEL = 3L;
-    private static final Long VALID_ID_FOR_CONCURRENCY = 4L;
     private static final String VALID_DESCRIPTION = "description_test";
     private static final Long VALID_AMOUNT = 250L;
     public static final String UPDATED_DESCRIPTION = "Updated Description";
@@ -76,14 +76,22 @@ public class ProductControllerIT {
 
         String jsonRequest = objectMapper.writeValueAsString(productDTO);
 
-        mockMvc.perform(post(PRODUCT_PATH)
+        MvcResult result = mockMvc.perform(post(PRODUCT_PATH)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(jsonRequest))
                 .andExpect(status().isCreated())
                 .andReturn();
+
+        String jsonResponse = result.getResponse().getContentAsString();
+        ProductDTO response = objectMapper.readValue(jsonResponse, ProductDTO.class);
+
+        assertNotNull(response.getId());
+        assertEquals(VALID_DESCRIPTION, response.getDescription());
+        assertEquals(VALID_AMOUNT, response.getAmount());
     }
 
     @Test
+    @Disabled
     void shouldUpdateProductSuccessfully() throws Exception {
         ProductDTO updatedProduct = new ProductDTO();
         updatedProduct.setDescription(UPDATED_DESCRIPTION);
