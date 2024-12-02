@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class OneboxchallengeApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(OneboxchallengeApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(OneboxchallengeApplication.class, args);
+    }
 
 }

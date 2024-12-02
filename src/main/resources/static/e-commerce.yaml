@@ -28,12 +28,8 @@ paths:
               $ref: '#/components/schemas/ProductDTO'
         required: true
       responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProductDTO'
+        '201':
+          description: Product created successfully
         '400':
           description: Invalid input
         '422':
@@ -252,6 +248,7 @@ components:
     ProductDTO:
       required:
         - amount
+        - description
       type: object
       properties:
         id:
@@ -266,6 +263,7 @@ components:
           type: integer
           format: int64
           example: 500
+          minimum: 0
   requestBodies:
     Product:
       description: Product object that needs to be added to the store
