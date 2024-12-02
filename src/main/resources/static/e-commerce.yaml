@@ -1,0 +1,275 @@
+openapi: 3.0.3
+info:
+  title: OneBox Challenge API
+  version: 0.1.0
+  description: |-
+    This is a Cart Server build with the OpenAPI 3.0 specification to solve the OneBox SW Engineer test.
+    This is an API RESTful that expose CRUD endpoints to handle an e-commerce cart.
+servers:
+  - url: https://localhost:8080
+tags:
+  - name: products
+    description: a CRUD about products
+  - name: carts
+    description: a cart to handle orders
+paths:
+  /products:
+    post:
+      tags:
+        - products
+      summary: Add a new product to the store
+      description: Add a new product to the store
+      operationId: createProduct
+      requestBody:
+        description: Create a new product in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductDTO'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductDTO'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+    get:
+      tags:
+        - products
+      summary: Retrieve all products in the store
+      description: Retrieve all products in the store
+      operationId: getAllProducts
+      responses:
+        '200':
+          description: List of all products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductDTO'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+  /products/{productId}:
+    get:
+      tags:
+        - products
+      summary: Find product by ID
+      description: Returns a single product
+      operationId: getProductById
+      parameters:
+        - name: productId
+          in: path
+          description: ID of product to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductDTO'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Product not found
+    put:
+      tags:
+        - products
+      summary: Update an existing product
+      description: Update an existing product by Id
+      operationId: updateProduct
+      parameters:
+        - name: productId
+          in: path
+          description: ID of product to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Update an existent product in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductDTO'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductDTO'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Product not found
+        '422':
+          description: Validation exception
+    delete:
+      tags:
+        - products
+      summary: Deletes a product
+      description: delete a product
+      operationId: deleteProduct
+      parameters:
+        - name: productId
+          in: path
+          description: Product id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid product value
+  /carts:
+    post:
+      tags:
+        - carts
+      summary: Create a cart in the store
+      description: Creates a new cart in the store and returns its details
+      operationId: createCart
+      requestBody:
+        description: Details of the cart to be created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartDTO'
+        required: true
+      responses:
+        '201':
+          description: Cart created succesfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartDTO'
+        '400':
+          description: Invalid input
+        '422':
+          description: Validation exception
+  /carts/{cartId}:
+    get:
+      tags:
+        - carts
+      summary: Find cart by ID
+      description: Returns a list of products added to a cart
+      operationId: getCartById
+      parameters:
+        - name: cartId
+          in: path
+          description: ID of cart to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartDTO'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Cart not found
+    put:
+      tags:
+        - carts
+      summary: Update an existing cart
+      description: Update an existing cart by Id
+      operationId: updateCart
+      parameters:
+        - name: cartId
+          in: path
+          description: ID of cart to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Update an existent cart in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CartDTO'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartDTO'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Cart not found
+        '422':
+          description: Validation exception
+    delete:
+      tags:
+        - carts
+      summary: Deletes a cart
+      description: delete a cart
+      operationId: deleteCart
+      parameters:
+        - name: cartId
+          in: path
+          description: Cart id to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '400':
+          description: Invalid cart value
+components:
+  schemas:
+    CartDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductDTO'
+    ProductDTO:
+      required:
+        - amount
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 10
+        description:
+          type: string
+          example: pencil
+          maxLength: 255
+        amount:
+          type: integer
+          format: int64
+          example: 500
+  requestBodies:
+    Product:
+      description: Product object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProductDTO'
