@@ -2,10 +2,13 @@ package com.onebox.oneboxchallenge.product.infrastructure.adapters.input;
 
 import com.onebox.oneboxchallenge.product.application.ports.input.ProductUseCase;
 import com.onebox.oneboxchallenge.product.domain.model.Product;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.openapitools.api.ProductsApi;
 import org.openapitools.model.ProductDTO;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,10 +21,10 @@ public class ProductController implements ProductsApi {
     private final ProductUseCase productUseCase;
 
     @Override
-    public ResponseEntity<ProductDTO> createProduct(ProductDTO productDTO) {
+    public ResponseEntity<Void> createProduct(@Valid @RequestBody ProductDTO productDTO) {
         Product product = mapToDomain(productDTO);
-        Product createdProduct = productUseCase.createProduct(product);
-        return ResponseEntity.ok(mapToDto(createdProduct));
+        productUseCase.createProduct(product);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @Override

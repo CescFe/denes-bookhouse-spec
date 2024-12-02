@@ -2,6 +2,7 @@ package com.onebox.oneboxchallenge.product.application.services;
 
 import com.onebox.oneboxchallenge.product.application.ports.input.ProductUseCase;
 import com.onebox.oneboxchallenge.product.application.ports.output.ProductRepositoryPort;
+import com.onebox.oneboxchallenge.product.domain.exceptions.ProductNotFoundException;
 import com.onebox.oneboxchallenge.product.domain.model.Product;
 import lombok.RequiredArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductService implements ProductUseCase {
 
+    public static final String PRODUCT_NOT_FOUND = "Product not found";
     private final ProductRepositoryPort productRepository;
 
     @Override
@@ -31,7 +33,7 @@ public class ProductService implements ProductUseCase {
     @Override
     public Product getProductById(Long id) {
         return productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ProductNotFoundException(PRODUCT_NOT_FOUND));
     }
 
     @Override
