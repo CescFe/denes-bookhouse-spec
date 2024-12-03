@@ -65,10 +65,11 @@ The API supports CRUD operations for both entities while adhering to industry st
 
 1. **Improve Test Coverage:**
     - Expand unit tests to cover edge cases more comprehensively.
-    - Add integration tests to improve bad path coverage.
+    - Improve integration tests bad path coverage.
 
 2. **Security:**
     - Authentication and authorization mechanisms (e.g., JWT) are not implemented.
+    - To achieve this, `e-commerce.yaml` should be updated including a SecuritySchema.
 
 3. **Caching:**
     - Introduce in-memory caching (e.g., Caffeine) for frequently accessed data like product details.

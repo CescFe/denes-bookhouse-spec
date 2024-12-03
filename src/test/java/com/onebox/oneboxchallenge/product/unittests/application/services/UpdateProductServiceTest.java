@@ -20,8 +20,6 @@ public class UpdateProductServiceTest {
     public static final long AMOUNT_OLD = 10L;
     public static final String DESCRIPTION_UPDATED = "Updated Product";
     public static final long AMOUNT_UPDATED = 20L;
-    public static final String EXPECTED_DESCRIPTION = "Updated Product";
-    public static final long EXPECTED_AMOUNT = 20L;
 
     @Mock
     private ProductRepositoryPort productRepository;
@@ -53,8 +51,8 @@ public class UpdateProductServiceTest {
 
         // Assert
         assertEquals(productId, result.getId());
-        assertEquals(EXPECTED_DESCRIPTION, result.getDescription());
-        assertEquals(EXPECTED_AMOUNT, result.getAmount());
+        assertEquals(DESCRIPTION_UPDATED, result.getDescription());
+        assertEquals(AMOUNT_UPDATED, result.getAmount());
         verify(productRepository).save(product);
     }
 }
