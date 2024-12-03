@@ -66,18 +66,22 @@ The API supports CRUD operations for both entities while adhering to industry st
 1. **Improve Test Coverage:**
     - Expand unit tests to cover edge cases more comprehensively.
     - Improve integration tests bad path coverage.
+    - Add unit tests to mappers.
 
 2. **Security:**
     - Authentication and authorization mechanisms (e.g., JWT) are not implemented.
     - To achieve this, `e-commerce.yaml` should be updated including a SecuritySchema.
 
-3. **Caching:**
+3. **Code Refactor:**
+    - Extract mappers into a new class.
+
+4. **Caching:**
     - Introduce in-memory caching (e.g., Caffeine) for frequently accessed data like product details.
 
-4. **API Documentation UI:**
+5. **API Documentation UI:**
     - UI integration for interactive API documentation (e.g.: Swagger UI, Stoplight, Redocly).
 
-5. **OpenAPI Refactor:**
+6. **OpenAPI Refactor:**
     - Refactor `e-commerce.yaml` extracting and reusing schemas, responses, requests and errors.
 
 ## ✏️Possible Improvements
@@ -87,7 +91,7 @@ The API supports CRUD operations for both entities while adhering to industry st
     - Include a Quality Assurance folder to test in depth the use cases.
 
 2. **Monitoring:**
-    - Integrate tools like Prometheus and Grafana for performance monitoring and alerting.
+    - Integrate tools like Prometheus and Grafana for performance monitoring and trace logs.
 
 3. **API Versioning:**
     - Introduce versioning to maintain backward compatibility.
@@ -129,3 +133,4 @@ https://www.postman.com/material-operator-40700101/workspace/onebox-challenge
 
 ![img.png](readme_resources/postman_post_cart.png)
 
+Although in the Integration Tests data is inserted into the in-memory database using a `schema.sql` and `data.sql`, outside the context of the tests, no data insertion has been automated. It must be done manually.
