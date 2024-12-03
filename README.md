@@ -1,5 +1,14 @@
 # OneBox Software Engineer Test
 
+## Table of Contents
+1. [Abstract](#abstract)
+2. [Technologies Used](#technologies-used)
+3. [Approach to the Solution](#approach-to-the-solution)
+4. [Pending Topics](#pending-topics)
+5. [Possible Improvements](#possible-improvements)
+6. [How to Run the Application](#how-to-run-the-application)
+7. [How to Test the Application](#how-to-test-the-application)
+
 ## Abstract
 This project is a solution to the OneBox Software Engineer technical test. 
 It involves simulating the functionality of an e-commerce system.
@@ -48,11 +57,15 @@ The API supports CRUD operations for both entities while adhering to industry st
 2. **Security:**
     - Authentication and authorization mechanisms (e.g., JWT) are not implemented.
 
-3. **API Documentation:**
+3. **Caching:**
+   - Introduce in-memory caching (e.g., Caffeine) for frequently accessed data like product details.
+
+4. **API Documentation:**
     - UI integration for interactive API documentation (e.g.: Swagger UI, Stoplight, Redocly).
 
-4. **Caching:**
-    - Introduce in-memory caching (e.g., Caffeine) for frequently accessed data like product details.
+5. **OpenAPI Refactor:**
+   - Refactor `e-commerce.yaml` extracting and reusing schemas, responses, requests and errors.
+
 
 ## Possible Improvements
 1. **Scalability:**
@@ -75,13 +88,13 @@ The API supports CRUD operations for both entities while adhering to industry st
 6. **Data Persistence:**
     - Transition from H2 to a production-grade database (e.g.: PostgreSQL or MySQL).
 
-## (TBD) How to Run the Application
+## How to Run the Application
 1. **Clone the Repository:**
 2. **Build the Project:**
 3. **Run the Application:**
 4. **Access the API:**
 
-## Testing the Application
+## How to Test the Application
 - This Postman workspace can be used:
 ```
 https://www.postman.com/material-operator-40700101/workspace/onebox-challenge/folder/19719512-c8a8df6c-2fe2-43de-8a1f-b83cd3f50645?action=share&source=copy-link&creator=19719512
