@@ -1,5 +1,6 @@
 package com.onebox.oneboxchallenge.shared.infrastructure.handlers;
 
+import com.onebox.oneboxchallenge.cart.domain.exceptions.CartNotFoundException;
 import com.onebox.oneboxchallenge.product.domain.exceptions.ProductNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,5 +31,10 @@ public class GlobalExceptionHandler {
                 .orElse("Validation error");
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
+    }
+
+    @ExceptionHandler(CartNotFoundException.class)
+    public ResponseEntity<String> handleCartNotFoundException(CartNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 }
