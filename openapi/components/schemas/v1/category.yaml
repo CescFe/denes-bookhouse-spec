@@ -1,0 +1,22 @@
+type: object
+properties:
+  id:
+    type: string
+    format: int64
+    description: Unique identifier for the category.
+    readOnly: true
+  category:
+    type: string
+    description: Category of the product.
+    example: Category Name
+  description:
+    type:
+      - string
+      - 'null'
+    description: Description of the category.
+  dateCreated:
+    $ref: '../common/iso_timestamp.yaml'
+  dateUpdated:
+    $ref: '../common/iso_timestamp.yaml'
+required:
+  - category

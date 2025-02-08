@@ -1,0 +1,28 @@
+get:
+  tags:
+    - Order
+  summary: List orders
+  description: |
+      Get a list of orders.
+  operationId: listOrders
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../../components/schemas/v1/order_list.yaml'
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/Problem.yaml'
+    '404':
+      description: Not found
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/Problem.yaml'

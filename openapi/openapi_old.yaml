@@ -1,0 +1,69 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: API First with Spring Boot
+  termsOfService: https://example.com/terms/
+  contact:
+    name: Cesc Fe
+    email: fraferru@gmail.com
+    url: http://example.com/contact
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: 'https://redocly.github.io/openapi-template/logo.png'
+    altText: OpenAPI example logo
+  description: >
+    This is an **example** API to demonstrate features of the OpenAPI
+    specification.
+externalDocs:
+  description: "Find out how to create a GitHub repo for your OpenAPI definition."
+  url: 'https://github.com/Redocly/create-openapi-repo'
+tags:
+  - name: Customer
+    description: Operations about customers.
+  - name: Product
+    description: Operations about products.
+  - name: Order
+    description: Operations about orders.
+servers:
+  - url: https://{tenant}/api/v1
+    variables:
+      tenant:
+        default: www
+#        description: Your tenant id
+  - url: https://example.com/api/v1
+paths:
+  '/v1/customers':
+    $ref: 'paths/v1/customers.yaml'
+  '/v1/customers/{customerId}':
+    $ref: 'paths/v1/customer.yaml'
+  '/v1/products':
+    $ref: 'paths/v1/products.yaml'
+  '/v1/products/{productId}':
+    $ref: 'paths/v1/product.yaml'
+  '/v1/orders':
+    $ref: 'paths/v1/orders.yaml'
+  '/v1/orders/{orderId}':
+    $ref: 'paths/v1/order.yaml'
+security:
+  - basic_auth: []
+components:
+  securitySchemes:
+    main_auth:
+      description: "Example description text of the OAuth2 scheme."
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: http://example.com/api/oauth/dialog
+          scopes:
+            'read:users': read user info
+            'write:users': modify or remove users
+    api_key:
+      description: "Example description text of the API key scheme."
+      type: apiKey
+      in: header
+      name: api_key
+    basic_auth:
+      type: http
+      scheme: basic

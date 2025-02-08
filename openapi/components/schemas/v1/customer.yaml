@@ -1,0 +1,39 @@
+type: object
+properties:
+  id:
+    type: string
+    format: int64
+    description: Unique identifier for the customer.
+    readOnly: true
+  name:
+    $ref: 'name.yaml'
+  shipToAddress:
+    $ref: 'address.yaml'
+  billToAddress:
+    $ref: 'address.yaml'
+  email:
+    type: [string, 'null']
+    description: Email address.
+    minLength: 5
+    maxLength: 100
+    example: john@example.com
+  phone:
+    type:
+      - string
+      - 'null'
+    description: Phone number.
+    minLength: 7
+    maxLength: 15
+    example: 123-456-7890
+  paymentMethod:
+    type: array
+    items:
+      $ref: 'payment_method.yaml'
+  dateCreated:
+    $ref: '../common/iso_timestamp.yaml'
+  dateUpdated:
+    $ref: '../common/iso_timestamp.yaml'
+required:
+  - name
+  - shipToAddress
+  - billToAddress

@@ -1,0 +1,24 @@
+type: object
+properties:
+  height:
+    type: number
+    description: The height of the product in pixels.
+    minimum: 0
+    maximum: 1000
+    example: 150
+  width:
+    type: number
+    description: The width of the product in pixels.
+    minimum: 0
+    maximum: 1000
+    example: 200
+  depth:
+    type: number
+    description: The depth of the product in pixels.
+    minimum: 0
+    maximum: 1000
+    example: 50
+required:
+  - height
+  - width
+  - depth

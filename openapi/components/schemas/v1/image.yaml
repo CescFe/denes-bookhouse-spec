@@ -1,0 +1,22 @@
+type: object
+properties:
+  id:
+    type: string
+    format: int64
+    description: Unique identifier for the image.
+    readOnly: true
+  url:
+    type: string
+    description: The URL of the image.
+    example: http://example.com/image.jpg
+  altText:
+    type: string
+    description: The alt text of the image.
+    example: Image description
+  dateCreated:
+    $ref: '../common/iso_timestamp.yaml'
+  dateUpdated:
+    $ref: '../common/iso_timestamp.yaml'
+required:
+  - url
+  - altText

@@ -1,0 +1,29 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: The ID of the order line.
+    example: 123e4567-e89b-12d3-a456-426614174000
+  product:
+    $ref: 'order_product.yaml'
+  order_quantity:
+    type: integer
+    description: The quantity of the product in the order.
+    minimum: 1
+    example: 2
+  ship_quantity:
+    type:
+      - integer
+      - 'null'
+    description: The quantity of the product that has been shipped.
+    minimum: 0
+    example: 1
+  dateCreated:
+    $ref: '../common/iso_timestamp.yaml'
+  dateUpdated:
+    $ref: '../common/iso_timestamp.yaml'
+required:
+  - id
+  - product
+  - order_quantity

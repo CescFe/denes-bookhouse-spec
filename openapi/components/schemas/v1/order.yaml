@@ -1,0 +1,42 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: The ID of the order.
+    example: 123e4567-e89b-12d3-a456-426614174000
+    readOnly: true
+  customer:
+    $ref: 'order_customer.yaml'
+  orderStatus:
+    type: string
+    description: The status of the order.
+    enum:
+      - placed
+      - approved
+      - delivered
+    example: placed
+  shipmentInfo:
+    type:
+      - string
+      - 'null'
+    description: Information about the shipment.
+    maxLength: 500
+    example: "Shipment will be delivered within 5-7 business days."
+  orderLines:
+    type: array
+    items:
+      $ref: 'order_line.yaml'
+    description: The products in the order.
+    minItems: 1
+    example:
+      - productId: 1
+        quantity: 2
+  dateCreated:
+    $ref: '../common/iso_timestamp.yaml'
+  dateUpdated:
+    $ref: '../common/iso_timestamp.yaml'
+required:
+  - customer
+  - orderStatus
+  - orderLines

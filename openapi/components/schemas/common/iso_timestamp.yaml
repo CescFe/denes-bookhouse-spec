@@ -1,0 +1,6 @@
+type: string
+format: date-time
+description: ISO 8601 Timestamp. Date Created and Date Updated are system managed values, should not be provided in the request.
+example: 2023-01-01T12:00:00Z
+title: ISO Timestamp
+readOnly: true
